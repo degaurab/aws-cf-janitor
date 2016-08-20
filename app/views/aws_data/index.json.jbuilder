@@ -1,0 +1,1 @@
+json.array! @aws_data, partial: 'aws_data/aws_datum', as: :aws_datum

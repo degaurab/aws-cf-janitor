@@ -1,0 +1,2 @@
+module AwsDataHelper
+end

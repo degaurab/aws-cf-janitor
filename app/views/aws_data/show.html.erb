@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Aws access key:</strong>
+  <%= @aws_datum.aws_access_key %>
+</p>
+
+<p>
+  <strong>Aws secret key:</strong>
+  <%= @aws_datum.aws_secret_key %>
+</p>
+
+<p>
+  <strong>Manifest template:</strong>
+  <%= @aws_datum.manifest_template %>
+</p>
+
+<%= link_to 'Edit', edit_aws_datum_path(@aws_datum) %> |
+<%= link_to 'Back', aws_data_path %>
