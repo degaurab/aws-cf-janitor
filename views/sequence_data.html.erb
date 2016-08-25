@@ -1,0 +1,61 @@
+<div class="content" xmlns="http://www.w3.org/1999/html">
+  <div class="page-title"><h1>Welcome to CF Janitor(AWS)</h1></div>
+  <div class="more-info-label" style="text-align: center"><h4>(monk who sold his ferrari to run CF on AWS)</h4></div>
+  <script>
+  </script>
+  <div class="form-group">
+    <form method="POST" action="/get_sequence" id="get_sequence">
+      <div class="input-group">
+        <span class="glyphicon glyphicon-user input-group-addon" aria-hidden="true"></span>
+        <input type="text" class="form-control" placeholder="AWS Access ID" aria-describedby="basic-addon1" name="aws_access_id">
+      </div>
+      <div class="input-group">
+        <span class="glyphicon glyphicon-asterisk input-group-addon" aria-hidden="true"></span>
+        <input type="text" class="form-control" placeholder="AWS Secret Key" aria-describedby="basic-addon1" name="aws_secret_key">
+      </div>
+      <div class="input-group">
+        <span class="glyphicon glyphicon-asterisk input-group-addon" aria-hidden="true"></span>
+        <input type="text" class="form-control" placeholder="Deployment Name" aria-describedby="basic-addon1" name="deployment_name">
+      </div>
+      <div class="input-group">
+        <span class="glyphicon glyphicon-asterisk input-group-addon" aria-hidden="true"></span>
+        <input type="text" class="form-control" placeholder="Region" aria-describedby="basic-addon1" name="region">
+      </div>
+      <div>
+        <button type="button submit" id= "show_sequence" class="btn btn-primary center-block" align="Left Align">Show Sequence</button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-primary pull-left" align="Left Align">Bring it up</button>
+        <button type="button" class="btn btn-danger pull-right" align="Right Align">Burn Down</button>
+      </div>
+      <div class="form-group">
+        <div class="page-title" id="show_sequence_header" ><h3>Sequence Extracted from AWS Deployment</h3></div>
+        <div class="row">
+          <div class="table-responsive col-md-6">
+            <%= @start_seq_data.empty?%>
+            <table id="start_sequence">
+              <caption>Start sequence</caption>
+              <% if !@start_seq_data.empty?
+                    @start_seq_data.each do |job_name, instance|
+              %>
+                    <tr><td><%= job_name %> : <%= instance%></td></tr>
+                <%end%>
+              <%end%>
+
+            </table>
+          </div>
+          <div class="table-responsive col-md-6">
+            <table id="stop_sequence">
+              <caption>Stop sequence</caption>
+              <% @stop_seq_data.each do |job_name, instance|%>
+                <tr><td><%= job_name %> <%= instance%></td></tr>
+              <%end%>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

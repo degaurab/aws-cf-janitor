@@ -1,49 +1,48 @@
 ---
 start_sequence:
-- {id: , component_name: '', job_name_prefix: ''}
-- {id: 1, component_name: 'NATS', job_name_prefix: 'nats-'}
-- {id: 2, component_name: 'consul', job_name_prefix: 'consul_server-'}
-- {id: 3, component_name: 'etcd', job_name_prefix: 'etcd_server-'}
-- {id: 4, component_name: 'Diego Database', job_name_prefix: 'diego_database-'}
-- {id: 5, component_name: 'NFS Server', job_name_prefix: 'nfs_server-'}
-- {id: 6, component_name: 'Router', job_name_prefix: 'router-'}
-- {id: 7, component_name: 'MySQL Proxy', job_name_prefix: 'mysql_proxy-'}
-- {id: 8, component_name: 'MySQL Server', job_name_prefix: 'mysql-'}
-- {id: 9, component_name: 'Cloud Controller Database', job_name_prefix: 'ccdb-'}
-- {id: 10, component_name: 'UAA Database', job_name_prefix: 'uaadb-'}
-- {id: 11, component_name: 'Apps Manager Database', job_name_prefix: 'consoledb-'}
-- {id: 12, component_name: 'Cloud Controller', job_name_prefix: 'cloud_controller-'}
-- {id: 13, component_name: 'HAProxy', job_name_prefix: 'ha_proxy-'}
-- {id: 14, component_name: 'Health Manager', job_name_prefix: 'health_manager-'}
-- {id: 15, component_name: 'Clock Global', job_name_prefix: 'clock_global-'}
-- {id: 16, component_name: 'Cloud Controller Worker', job_name_prefix: 'cloud_controller_worker-'}
-- {id: 17, component_name: 'Collector', job_name_prefix: 'collector-'}
-- {id: 18, component_name: 'UAA', job_name_prefix: 'uaa-'}
-- {id: 19, component_name: 'Diego Brain', job_name_prefix: 'diego_brain-'}
-- {id: 20, component_name: 'Diego Cell', job_name_prefix: 'diego_cell-'}
-- {id: 22, component_name: 'Doppler Server', job_name_prefix: 'doppler-'}
-- {id: 23, component_name: 'Loggregator Traffic Controller', job_name_prefix: 'loggregator_trafficcontroller-'}
+- { component_name: 'NATS', job_name_prefix: 'nats'}
+- { component_name: 'consul', job_name_prefix: 'consul_server'}
+- { component_name: 'etcd', job_name_prefix: 'etcd_server'}
+- { component_name: 'Diego Database', job_name_prefix: 'diego_database'}
+- { component_name: 'NFS Server', job_name_prefix: 'nfs_server'}
+- { component_name: 'Router', job_name_prefix: 'router'}
+- { component_name: 'MySQL Proxy', job_name_prefix: 'mysql_proxy'}
+- { component_name: 'MySQL Server', job_name_prefix: 'mysql'}
+- { component_name: 'Cloud Controller Database', job_name_prefix: 'ccdb'}
+- { component_name: 'UAA Database', job_name_prefix: 'uaadb'}
+- { component_name: 'Apps Manager Database', job_name_prefix: 'consoledb'}
+- { component_name: 'Cloud Controller', job_name_prefix: 'cloud_controller'}
+- { component_name: 'HAProxy', job_name_prefix: 'ha_proxy'}
+- { component_name: 'Health Manager', job_name_prefix: 'health_manager'}
+- { component_name: 'Clock Global', job_name_prefix: 'clock_global'}
+- { component_name: 'Cloud Controller Worker', job_name_prefix: 'cloud_controller_worker'}
+- { component_name: 'Collector', job_name_prefix: 'collector'}
+- { component_name: 'UAA', job_name_prefix: 'uaa'}
+- { component_name: 'Diego Brain', job_name_prefix: 'diego_brain'}
+- { component_name: 'Diego Cell', job_name_prefix: 'diego_cell'}
+- { component_name: 'Doppler Server', job_name_prefix: 'doppler'}
+- { component_name: 'Loggregator Traffic Controller', job_name_prefix: 'loggregator_trafficcontroller'}
 
 stop_sequence:
-- {id: 1, component_name: 'Loggregator Traffic Controller', job_name_prefix: 'loggregator_trafficcontroller-'}
-- {id: 2, component_name: 'Doppler Server', job_name_prefix: 'doppler-'}
-- {id: 4, component_name: 'Diego Cell', job_name_prefix: 'diego_cell-'}
-- {id: 5, component_name: 'Diego Brain', job_name_prefix: 'diego_brain-'}
-- {id: 6, component_name: 'UAA', job_name_prefix: 'uaa-'}
-- {id: 7, component_name: 'Collector', job_name_prefix: 'collector-'}
-- {id: 8, component_name: 'Cloud Controller Worker', job_name_prefix: 'cloud_controller_worker-'}
-- {id: 9, component_name: 'Clock Global', job_name_prefix: 'clock_global-'}
-- {id: 10, component_name: 'Health Manager', job_name_prefix: 'health_manager-'}
-- {id: 11, component_name: 'HAProxy', job_name_prefix: 'ha_proxy-'}
-- {id: 12, component_name: 'Cloud Controller', job_name_prefix: 'cloud_controller-'}
-- {id: 13, component_name: 'Apps Manager Database', job_name_prefix: 'consoledb-'}
-- {id: 14, component_name: 'UAA Database', job_name_prefix: 'uaadb-'}
-- {id: 15, component_name: 'Cloud Controller Database', job_name_prefix: 'ccdb-'}
-- {id: 16, component_name: 'MySQL Server', job_name_prefix: 'mysql-'}
-- {id: 17, component_name: 'MySQL Proxy', job_name_prefix: 'mysql_proxy-'}
-- {id: 18, component_name: 'Router', job_name_prefix: 'router-'}
-- {id: 19, component_name: 'NFS Server', job_name_prefix: 'nfs_server-'}
-- {id: 20, component_name: 'Diego Database', job_name_prefix: 'diego_database-'}
-- {id: 21, component_name: 'etcd', job_name_prefix: 'etcd_server-'}
-- {id: 22, component_name: 'consul', job_name_prefix: 'consul_server-'}
-- {id: 23, component_name: 'NATS', job_name_prefix: 'nats-'}
+- { component_name: 'Loggregator Traffic Controller', job_name_prefix: 'loggregator_trafficcontroller'}
+- { component_name: 'Doppler Server', job_name_prefix: 'doppler'}
+- { component_name: 'Diego Cell', job_name_prefix: 'diego_cell'}
+- { component_name: 'Diego Brain', job_name_prefix: 'diego_brain'}
+- { component_name: 'UAA', job_name_prefix: 'uaa'}
+- { component_name: 'Collector', job_name_prefix: 'collector'}
+- { component_name: 'Cloud Controller Worker', job_name_prefix: 'cloud_controller_worker'}
+- { component_name: 'Clock Global', job_name_prefix: 'clock_global'}
+- { component_name: 'Health Manager', job_name_prefix: 'health_manager'}
+- { component_name: 'HAProxy', job_name_prefix: 'ha_proxy'}
+- { component_name: 'Cloud Controller', job_name_prefix: 'cloud_controller'}
+- { component_name: 'Apps Manager Database', job_name_prefix: 'consoledb'}
+- { component_name: 'UAA Database', job_name_prefix: 'uaadb'}
+- { component_name: 'Cloud Controller Database', job_name_prefix: 'ccdb'}
+- { component_name: 'MySQL Server', job_name_prefix: 'mysql'}
+- { component_name: 'MySQL Proxy', job_name_prefix: 'mysql_proxy'}
+- { component_name: 'Router', job_name_prefix: 'router'}
+- { component_name: 'NFS Server', job_name_prefix: 'nfs_server'}
+- { component_name: 'Diego Database', job_name_prefix: 'diego_database'}
+- { component_name: 'etcd', job_name_prefix: 'etcd_server'}
+- { component_name: 'consul', job_name_prefix: 'consul_server'}
+- { component_name: 'NATS', job_name_prefix: 'nats'}

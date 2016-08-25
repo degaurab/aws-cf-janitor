@@ -1,0 +1,5 @@
+---
+applications:
+- name: cfjanitor
+  buildpack: ruby_buildpack
+  host: cfjanitor

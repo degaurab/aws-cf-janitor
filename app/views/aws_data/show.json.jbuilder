@@ -1,1 +1,0 @@
-json.partial! "aws_data/aws_datum", aws_datum: @aws_datum

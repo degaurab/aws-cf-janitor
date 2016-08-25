@@ -1,4 +1,6 @@
-# This file is used by Rack-based servers to start the application.
+$LOAD_PATH << File.expand_path('./lib', File.dirname(__FILE__))
+require 'cf_janitor/app'
 
-require ::File.expand_path('../config/environment', __FILE__)
-run Rails.application
+STDOUT.sync = true
+
+run CfJanitor::App
