@@ -7,3 +7,5 @@ gem 'font-awesome-sass'
 gem 'compass'
 gem 'aws-sdk-v1'
 gem 'logger'
+gem 'uaa'
+

@@ -13,17 +13,16 @@ module CfJanitor
     def list_sequence (deployment_name, sequence)
       instance_map = create_instance_map(deployment_name)
       instance_key_list = instance_map.keys
-      start_sequence ={}
-      stop_sequence = {}
+      instance_sequence ={}
       logger.debug("AwsManager::InstanceMap:#{instance_map}")
       sequence['start_sequence'].each do |component|
         job_name = component['job_name_prefix']
-        all_azs = instance_key_list.select{|instance| instance.match(/^#{job_name}(|_\w\d)\/\d/)}
-        start_sequence[job_name] = []
+        all_azs = instance_key_list.select{|instance| instance.match(/^#{job_name}(-\w+-\w+|_\w+)\/\d/)}
+        instance_sequence[job_name] = []
         if !all_azs.empty?
           logger.debug("AwsManager::AllMappedInstances:#{all_azs}")
           all_azs.each do |az|
-            start_sequence[job_name] << instance_map[az]
+            instance_sequence[job_name] << instance_map[az]
           end
         else
           logger.debug("AwsManager::NoInstance:JobName:#{job_name}")
@@ -34,20 +33,7 @@ module CfJanitor
       # TODO: start <--> stop sequence seems to be just reverse.
       #       so maybe we dont need to create list twice.
 
-      sequence['stop_sequence'].each do |component|
-        job_name = component['job_name_prefix']
-        all_azs = instance_key_list.select{|instance| instance.match(/^#{job_name}(|_\w\d)\/\d/)}
-        stop_sequence[job_name] = []
-        if !all_azs.empty?
-          logger.debug("AwsManager::AllMappedInstances:#{all_azs}")
-          all_azs.each do |az|
-            stop_sequence[job_name] << instance_map[az]
-          end
-        else
-          logger.debug("AwsManager::NoInstance:JobName:#{job_name}")
-        end
-      end
-      return start_sequence, stop_sequence
+      return instance_sequence, Hash[instance_sequence.to_a.reverse]
     end
 
     private

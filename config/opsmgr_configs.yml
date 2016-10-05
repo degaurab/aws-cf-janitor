@@ -1,0 +1,10 @@
+---
+client_id: "aws-cf-janitor"
+urls:
+  director_manifest: "api/v0/staged/director/manifest"
+  deployment_manifest: "/api/v0/deployed/products/#{product_guid}/manifest"
+bosh_director:
+  bundle_path: "BUNDLE_GEMFILE=/home/tempest-web/tempest/web/vendor/bosh/Gemfile bundle exec bosh -n"
+  root_cert: "/var/tempest/workspaces/default/root_ca_certificate"
+opsmgr:
+  ssh_user: 'ubuntu'

@@ -28,9 +28,7 @@ module CfJanitor
       puts "#{params['aws_access_id'].nil? | params['aws_access_id'].nil?}"
       if !(params['aws_access_id'].empty? | params['aws_secret_key'].empty?)
         aws_manager = AwsManager.new(params['aws_access_id'], params['aws_secret_key'], params['region'], logger)
-        start_seq_data, stop_seq_data = aws_manager.list_sequence(params['deployment_name'], sequence_data)
-        logger.debug(start_seq_data)
-        logger.debug(stop_seq_data)
+        @start_seq_data, @stop_seq_data = aws_manager.list_sequence(params['deployment_name'], sequence_data)
       end
 
       redirect '/sequence_data'
