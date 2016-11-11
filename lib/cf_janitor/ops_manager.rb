@@ -7,18 +7,19 @@ require 'httparty'
 
 module CfJanitor
   class OPSManager
-    def initialize(host_name, username, password, logger=nil)
+    def initialize(host_name, username, password, ssh_key_path, logger=nil)
       @host_url = "https://#{host_name}"
       @hostname = hostname
       @username = username
       @password = password
+      @key_path = ssh_key_path
       @logger = logger || Logger.new($stdout)
       @config = YAMl.load_file("../config/opsmgr_url.yml")
     end
 
-    attr_reader :logger, :host_url, :hostname :config, :username, :password
+    attr_reader :logger, :host_url, :hostname :config, :username, :password, :key_path
 
-    def strip_down_director_manifest(deployment_name)
+    def strip_down_director_manifest
       director_manifest = request_opsmgr(config.fetch('urls:director_manifest'))
       unless director_manifest.nil?
         manifest = JSON.parse(director_manifest.body)
@@ -26,21 +27,26 @@ module CfJanitor
       end
     end
 
-    def connect_to_director(director_ip, director_username, director_password)
-       target_bosh_director(director_ip)
-       bosh_login(director_username, director_password)
+    def init_director(director_ip, director_username, director_password)
+      ip, username, password = strip_down_director_manifest
+      target_bosh_director(ip)
+      bosh_login(username, password)
     end
 
     private
     def bosh_login(username, password)
       opsmgr_ssh_user = config_fetch("opsmgr:ssh_user")
+      upload_bosh_login_file(hostname, username, key_path)
+      ssh_user = config_fetch("opsmgr:ssh_user")
+      bosh_login_cmd = config_fetch("bosh_director:login_cmd")
+      send_ssh_cmd(bosh_login_cmd, "BOSH Login", false)
     end
 
     def target_bosh_director(director_ip, ssl_validation=false)
       bosh_exec = config_fetch("bosh_director:bundle_path")
       bosh_root_cert = config_fetch("bosh_director:root_cert")
       opsmgr_ssh_user = config_fetch("opsmgr:ssh_username")
-      send_ssh_cmd("#{bosh_exec} target #{director_ip} --ca-cert #{bosh_root_cert}", "BOSHTarget")
+      send_ssh_cmd("#{bosh_exec} -n --ca-cert #{bosh_root_cert} target #{director_ip}", "BOSHTarget")
     end
 
     def upload_bosh_login_file(hostname, username, key_path, file_path="config/director_login.sh")
@@ -54,10 +60,11 @@ module CfJanitor
       end
     end
 
-    def send_ssh_cmd(cmd, cmd_name)
+    def send_ssh_cmd(cmd, cmd_name, bosh_cmd=true)
+      cmd = "#{config_fetch("bosh_director:bundle_path")} #{cmd}" if bosh_cmd
       begin
         Net::SSH.start(host_name, opsmgr_ssh_user, :password => password) do |ssh|
-          bosh_output = ssh.exec!()
+          bosh_output = ssh.exec!(cmd)
           if bosh_output.include? "Target set to"
             logger.info("SSHCMD:Completed:#{cmd_name}:#{bosh_output}")
           else
